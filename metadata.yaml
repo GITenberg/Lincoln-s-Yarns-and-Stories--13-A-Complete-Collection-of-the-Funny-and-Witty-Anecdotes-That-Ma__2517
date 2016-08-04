@@ -1,0 +1,28 @@
+_repo: Lincoln-s-Yarns-and-Stories--13-A-Complete-Collection-of-the-Funny-and-Witty-Anecdotes-That-Ma__2517
+_version: 0.0.1
+creator:
+  author:
+    agent_name: McClure, Alexander K. (Alexander Kelly)
+    aliases:
+    - McClure, Alexander Kelly
+    - McClure, A. K. (Alexander Kelly)
+    birthdate: 1828
+    deathdate: 1909
+    gutenberg_agent_id: '949'
+    url: http://www.gutenberg.org/2009/agents/949
+description: ''
+gutenberg_issued: '2001-02-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '2517'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcc 'E456'
+- !lcsh 'Lincoln, Abraham, 1809-1865 -- Anecdotes'
+- GITenberg
+title: "Lincoln's Yarns and Stories\r\nA Complete Collection of the Funny and Witty\
+  \ Anecdotes That Made Lincoln Famous as America's Greatest Story Teller"
+url: http://www.gutenberg.org/ebooks/2517
