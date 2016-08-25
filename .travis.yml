@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: lD1EYdjA5a3NFyBeHGEBERdPYrTmFFPyGLbLgDWpCJFAyu8hZQsjp7s75RJ2xX0ZfEbHSpQuLBvoThZbeCP3LvKKSkfO9RW5yLVz3g+M9cNTS/JckUNOOuZGcIEJdAr74isq5h74EnZCoCEfTQw1+JhlYODupWqIgu0QyLnhId9fWWwesuY1P9b+G4qPAwEplnoXm2CTQhb6nUN9VyCJmtL2q1cUWUA3k3VsbAm6t/gZrgt2Kt6qCakzdMreX6Ak81l166ILQ2nJvtG/VLGKl4Du4td3ChLJQLKfnvNDdUG9cNVZrPRweJNAm8VXtjhfSGyAK1/HW7S/H9qgXA1bAE11tGyvZZ9K0i2a681pFmLN3tIVRkYzkrz8LUKesJZE7JTKG3O1KvxgwjUyjCbbPln6mOhGFO/dOhBsPQmwJne0A5sV+FP/Ii1YQVtfB/YoO+93lhthF8rwFk05IQII4QL5qkjC6UTtJMHFV5lhqKgLZLYZDEqYslKfHx63CfI3TUM7lP6rkzWVrKRvFJZiY3c0AhORwSRKHyWuPkTo7VyOuzlO2jHQ0nj/oZUDE7cdHAHSpsX4M2/dp923SH3V8AdD8IRcXeVHY2BjJwgaiC+pjsoFzW99CsgOtaL6UgrEeslAXLHAFYB5TJYknvy++Ep0ODrXgTgw7Ycm3RY6GXM=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Lincoln-s-Yarns-and-Stories--13-A-Complete-Collection-of-the-Funny-and-Witty-Anecdotes-That-Ma__2517
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
